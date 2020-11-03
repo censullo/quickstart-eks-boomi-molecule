@@ -1,0 +1,57 @@
+
+.Network configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|VPC ID
+(`VPCID`)|`**__Requires input__**`|The ID of your existing VPC (e.g., vpc-0343606e).|Private subnet 1 ID
+(`PrivateSubnet1ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 1 in your existing VPC (e.g., subnet-fe9a8b32).|Private subnet 2 ID
+(`PrivateSubnet2ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 2 in your existing VPC (e.g., subnet-be8b01ea).|Private subnet 3 ID
+(`PrivateSubnet3ID`)|`**__Requires input__**`|The ID of the private subnet in Availability Zone 3 in your existing VPC (e.g., subnet-abd39039).|Public subnet 1 ID
+(`PublicSubnet1ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 1 in your existing VPC (e.g., subnet-a0246dcd).|Public subnet 2 ID
+(`PublicSubnet2ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 2 in your existing VPC (e.g., subnet-b1236eea).|Public subnet 3 ID
+(`PublicSubnet3ID`)|`**__Requires input__**`|The ID of the public subnet in Availability Zone 3 in your existing VPC (e.g., subnet-c3456aba).|Allowed external access CIDR
+(`RemoteAccessCIDR`)|`**__Requires input__**`|The CIDR IP range that is permitted to access the instances. We recommend that you set this value to a trusted IP range.
+|===
+.Amazon EC2 configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Key pair name
+(`KeyPairName`)|`**__Requires input__**`|Key name for access to EC2 instances.
+|===
+.EKS configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Workload namespace
+(`WorkloadNamespace`)|`eks-boomi-molecule`|The Kubernetes namespace to use when provisioning the workload.|Nodes instance type
+(`NodeInstanceType`)|`t3.xlarge`|The type of EC2 instance for the node instances.|Number of nodes
+(`NumberOfNodes`)|`1`|The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.|Load balancer type
+(`LoadBalancerType`)|`ALB`|EKS Service Load Balancer Type.
+|===
+.Boomi Molecule configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Boomi account ID
+(`BoomiAccountID`)|`**__Requires input__**`|The Boomi account ID that you want to associate with the new Molecule cluster.|Boomi user name
+(`BoomiUsername`)|`**__Requires input__**`|The email account associated with the Boomi account.|Boomi password
+(`BoomiPassword`)|`**__Requires input__**`|The password associated with the Boomi account.|Molecule cluster name
+(`MoleculeClusterName`)|`Boomi-Molecule-EKS`|The name for the Boomi Molecule cluster.|**NO_LABEL**
+(`EFSProvisionedThroughputInMibps`)|`10`|The provisioned throughput value for the EFS volume.
+|===
+.DNS or SSL configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Molecule FQDN
+(`MoleculeFQDN`)|`**__Blank string__**`|The fully qualified domain name for the Boomi Molecule cluster. Use with 'HostedZoneID' if you are not using SSL..|Route 53 hosted zone ID
+(`HostedZoneID`)|`**__Blank string__**`|Route 53 Hosted Zone ID of the domain name. Used in conjunction with a 'MoleculeFQDN'.|SSL certificate ARN
+(`SSLCertificateArn`)|`**__Blank string__**`|The ARN of the SSL certificate to use for the load balancer. Use 'SSLCertificateArn' if you are not using 'MoleculeFQDN' and 'HostedZoneID'.
+|===
+.AWS Quick Start configuration
+[width="100%",cols="16%,11%,73%",options="header",]
+|===
+|Parameter label (name) |Default value|Description|Quick Start S3 bucket name
+(`QSS3BucketName`)|`aws-quickstart`|S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-).|Quick Start S3 bucket region
+(`QSS3BucketRegion`)|`us-east-1`|The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.|Quick Start S3 key prefix
+(`QSS3KeyPrefix`)|`quickstart-eks-boomi-molecule/`|The S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and forward slash (/).|Per account shared resources
+(`PerAccountSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this AWS account.|Per region shared resources
+(`PerRegionSharedResources`)|`Yes`|Choose "No" if you have already deployed another EKS Quick Start stack in this Region.
+|===

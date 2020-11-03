@@ -1,1 +1,6 @@
-// placeholder
+
+=== Launch into Existing VPC
+include::existing.template.adoc[]
+
+=== Launch into a new VPC
+include::new-main.template.adoc[]
