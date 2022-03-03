@@ -21,6 +21,8 @@ endif::marketplace_subscription[]
 
 === Launch the Quick Start
 
+NOTE: If you deploy Amazon EKS into an existing VPC, ensure that your VPC has private subnets in different Availability Zones for the workload instances. The subnets require egress internet access using a NAT gateway or an HTTP proxy. If you want to use the Kubernetes integration with Elastic Load Balancing, you must tag each private subnet with `kubernetes.io/role/internal-elb=true` and each public subnet with `kubernetes.io/role/elb=true`.
+
 NOTE: You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using this Quick Start. For full details, see the pricing pages for each AWS service used by this Quick Start. Prices are subject to change.
 
 . Sign in to your AWS account, and choose one of the following options to launch the AWS CloudFormation template. For help with choosing an option, see link:#_deployment_options[deployment options] earlier in this guide.
