@@ -7,7 +7,7 @@
 :doc-year: 2020
 :partner-contributors: Vilvamani Arumugam, AWS Cloud Evangelist, Accenture Solution Pvt Ltd
 // :other-contributors: Akua Mansa, Trek10
-:aws-contributors: Janine Singh, AWS IoT Partner team
+// :aws-contributors: Janine Singh, AWS IoT Partner team
 :aws-ia-contributors: Andrew Glenn, AWS Integration & Automation team
 :deployment_time: 1 hour
 :default_deployment_region: us-east-1
