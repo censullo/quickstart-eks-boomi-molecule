@@ -1,0 +1,12 @@
+
+:template_aws_cloudformation_stack:
+:template_aws_iam_role:
+:template_aws_lambda_function:
+:template_awsqs_kubernetes_helm:
+:template_awsqs_kubernetes_resource:
+:template_boomiverifylicense:
+:template_cloudformation:
+:template_custom_boomiverifylicense:
+:template_iam:
+:template_kubernetes:
+:template_lambda:
