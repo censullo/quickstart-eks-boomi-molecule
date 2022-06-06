@@ -13,4 +13,4 @@ In addition to the two deployment options, there is one authentication option:
 
 ** Deploy with authorized account ID, username, and password (not MFA compatible).
 
-To create an installation token see link:#_creating_an_installation_token[Creating an Installation Token] in this guide or contact your administrator.
+To create an installation token see link:#_creating_an_installation_token[Creating an Installation Token] later in this guide or contact your administrator.

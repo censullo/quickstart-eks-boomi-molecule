@@ -20,6 +20,6 @@ As shown in <<architecture1>>, this Quick Start sets up the following:
 * In the private subnets:
 ** Boomi Kubernetes Molecule deployed to Kubernetes nodes in an Auto Scaling group.
 ** Amazon Elastic File System (Amazon EFS) mount points.
-** Amazon Elastic Kubernetes Service (Amazon EKS) to provide the Kubernetes control plane.
+* Amazon Elastic Kubernetes Service (Amazon EKS) to provide the Kubernetes control plane.
 
 [.small]#* The template that deploys this Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.#
