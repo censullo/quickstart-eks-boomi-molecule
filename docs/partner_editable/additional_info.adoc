@@ -2,14 +2,14 @@
 //Should any sections not be applicable, remove them
 
 == Test the deployment
-To view the Molecule in the Boomi AtomSphere platform, log in to your https://platform.boomi.com/[Boomi account^], navigate to the *Manage* drop-down menu, and choose *Atom Management*. The newly created Amazon Molecule EKS cluster will be displayed.
+To view the Molecule in Boomi AtomSphere, log in to your https://platform.boomi.com/[Boomi account^]. On the *Manage* menu, choose *Atom Management*.
 
 [#AddInfo1]
 .Boomi Dashboard with an unattached AWS-managed Molecule Cluster
 [link=images/image3.png]
 image::../images/image3.png[image,width=648,height=293]
 
-You can then attach the Molecules to any environment you have staged and deploy workloads to that Molecule cluster. By Default the molecule you deployed will be under ‘Unattached Atoms’. When you click on ‘Atom Information’ you will see an option to attach it to an environment.
+You can attach Molecules to any environment you have staged and deploy workloads to that Molecule cluster. On the Boomi dashboard, your deployed Molecule is under *Unattached Atoms*. For more information, refer to https://help.boomi.com/bundle/integration/page/t-atm-Attaching_an_Atom_to_an_Enviro.html[Attaching an Atom to or detaching an Atom from an environment^]
 
 //== Best practices for using {partner-product-name} on AWS
 // Provide post-deployment best practices for using the technology on AWS, including considerations such as migrating data, backups, ensuring high performance, high availability, etc. Link to software documentation for detailed information.
@@ -17,7 +17,7 @@ You can then attach the Molecules to any environment you have staged and deploy 
 //_Add any best practices for using the software._
 
 == Security
-This Quick Start deploys a bastion host and a Boomi Molecule EKS cluster into an AWS VPC. The bastion host is the only means of accessing the Boomi Molecule EKS cluster at a command-line level. The Boomi Molecule EKS cluster is deployed into private subnets and cannot be reached through the internet. The Boomi Molecule EKS cluster communicates through a NAT Gateway for updates and patches, and it communicates through the public-facing Application Load Balancer or Network Load Balancer to communicate with the Boomi AtomSphere platform.
+This Quick Start deploys a bastion host and a Boomi Molecule EKS cluster into an AWS VPC. The bastion host is the only means of accessing the Boomi Molecule EKS cluster at a command-line level. The Boomi Molecule EKS cluster is deployed into private subnets and cannot be reached through the internet. The Boomi Molecule EKS cluster communicates through a NAT Gateway for updates and patches, and it communicates through the public-facing Network Load Balancer to communicate with the Boomi AtomSphere platform.
 
 == Other useful information
 //Provide any other information of interest to users, especially focusing on areas where AWS or cloud usage differs from on-premises usage.

@@ -5,8 +5,8 @@ AWS Cloud.
 // Replace this example diagram with your own. Send us your source PowerPoint file. Be sure to follow our guidelines here : http://(we should include these points on our contributors guide)
 
 [#architecture1]
-.Quick Start architecture for _{partner-product-name}_ on AWS
-[link=images/image2.png]
+.Quick Start architecture for {partner-product-name} on AWS
+[link=..images/boomi-kubernetes-molecule-architecture-diagram.png]
 image::../images/boomi-kubernetes-molecule-architecture-diagram.png[image,width=648,height=430]
 
 The Quick Start sets up the following:
