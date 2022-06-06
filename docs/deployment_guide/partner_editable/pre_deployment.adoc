@@ -4,6 +4,6 @@
 
 === Prepare your {partner-company-name} account
 
-Ensure that your Dell Boomi account has at least one available Enterprise Molecule license and that you have a valid Boomi account ID and login credentials.
+Ensure that your Boomi account has at least one available Enterprise Molecule license and that you have a valid Boomi account ID and login credentials.
 
 NOTE: If you deploy Amazon EKS into an existing VPC, ensure that your VPC has private subnets in different Availability Zones for the workload instances. The subnets require egress internet access using a NAT gateway or an HTTP proxy. If you want to use the Kubernetes integration with Elastic Load Balancing, you must tag each private subnet with `kubernetes.io/role/internal-elb=true` and each public subnet with `kubernetes.io/role/elb=true`.
