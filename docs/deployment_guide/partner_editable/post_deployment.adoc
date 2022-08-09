@@ -86,35 +86,30 @@ To upgrade the Boomi Molecule image, complete the following steps.
 +
 `kubectl apply -f statefulset.yaml -n eks-boomi-molecule`
 
-=== Configure SSL certificate to load balancers
+=== Apply SSL certificate to the load balancers
 
-Add listeners to the Application Load Balancer and Network Load Balancer.
+Follow the instructions in this section to add listeners to the Application Load Balancer and Network Load Balancer.
 
-Application Load Balancer:
+==== Application Load Balancer
 
-.	Go to application load balancer
-.	Open listeners tab and click on add listener
-.	Select HTTPS Protocol
-.	Select Forward action and map to correct target group
-.	Select valid SSL certificate from ACM
-.	Open security group attached to ALB and add HTTPS -> 0.0.0.0/0 inbound rule.
-.	Go to Route 53 domain name and add new A record with same name as SSL certificate name
-.	Edit record name and route traffic to ALB
+. https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#add-https-listener[Add an HTTPS listener^] for your Application Load Balancer.
+.. For *Protocol : port*, select *HTTPS*.
+.. For *Default actions*, select *Forward to*, then select the target group.
 
-https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#addanhttpslistener
-
-https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html
-
-https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#addrulestoasecuritygroup
+. https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#working-with-security-group-rules[Add an inbound rule^] to the security group attached to the Application Load Balancer.
+.. For rule *Type*, choose *HTTP*.
+.. For rule *Source*, choose *Anywhere-IPv4*. This automatically adds a rule for the `0.0.0.0/0 IPv4` CIDR block.
+. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Add a new A record^] to your domain in Amazon Route 53.
+. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html[Edit the record name^].
+. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html#routing-to-elb-load-balancer-configuring[Route traffic^] to the Application Load Balancer.
 
 ==== Network Load Balancer
 
-. https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-listener.html[Create a listener] for your Network Load Balancer.
+. https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-listener.html[Create a listener^] for your Network Load Balancer.
 .. For *Protocol : port*, select *TLS*.
 .. For *Default actions*, select *Forward to*, then select the target group.
 
-. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Add a new A record] to your domain name in Amazon Route 53.
-. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html[Edit the record name].
-. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html#configuringamazonroute53toroutetraffictoanelbloadbalancer[Route traffic] to the Network Load Balancer.
-
+. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Add a new A record^] to your domain in Amazon Route 53.
+. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html[Edit the record name^].
+. https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html#routing-to-elb-load-balancer-configuring[Route traffic^] to the Network Load Balancer.
 
