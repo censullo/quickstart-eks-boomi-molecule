@@ -5,7 +5,7 @@
 :partner-company-name: Boomi
 :doc-month: October
 :doc-year: 2020
-:partner-contributors: Vilvamani Arumugam, AWS Cloud Evangelist, Accenture
+:partner-contributors: Boomi Quick Start team
 // :other-contributors: Akua Mansa, Trek10
 // :aws-contributors: Janine Singh, AWS IoT Partner team
 :aws-ia-contributors: Andrew Glenn, AWS Integration & Automation team
