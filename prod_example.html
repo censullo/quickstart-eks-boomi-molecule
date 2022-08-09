@@ -855,6 +855,9 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_performance_monitoring">Performance monitoring</a></li>
 <li><a href="#_creating_an_installation_token">Creating an installation token</a></li>
 <li><a href="#_creating_an_api_token">Creating an API token</a></li>
+<li><a href="#_bastion_host_pod_autoscaling_and_node_autoscaling">Bastion host, pod autoscaling, and node autoscaling</a></li>
+<li><a href="#_upgrade_boomi_molecule_docker_image">Upgrade Boomi Molecule Docker image</a></li>
+<li><a href="#_apply_ssl_certificate_to_the_load_balancers">Apply SSL certificate to the load balancers</a></li>
 </ul>
 </li>
 <li><a href="#_troubleshooting">Troubleshooting</a></li>
@@ -880,7 +883,7 @@ p.footer-text a{color:#d7d8d8}
 </div>
 <div class="paragraph text-center">
 <p><strong>October 2020</strong><br>
-<em>Vilvamani Arumugam, AWS Cloud Evangelist, Accenture</em><br>
+<em>Boomi Quick Start team</em><br>
 <em>Andrew Glenn, AWS Integration &amp; Automation team</em><br></p>
 </div>
 <div class="admonitionblock tip text-left">
@@ -1126,7 +1129,7 @@ Unless you are customizing the Quick Start templates for your own projects, don&
 <div class="sect2">
 <h3 id="_creating_an_installation_token">Creating an installation token</h3>
 <div class="paragraph">
-<p>Administrators can create an installation token without having to share login credentials for an Atom/Molecule installation. To create an installation token, do the following:</p>
+<p>Administrators can create an installation token without having to share login credentials for an Atom/Molecule installation.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1163,7 +1166,7 @@ Unless you are customizing the Quick Start templates for your own projects, don&
 <div class="sect2">
 <h3 id="_creating_an_api_token">Creating an API token</h3>
 <div class="paragraph">
-<p>Administrators can create a long-lived API token without having to share Boomi login credentials. To create an user API token, do the following:</p>
+<p>Administrators can create a long-lived API token without having to share Boomi login credentials.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1218,6 +1221,130 @@ Copy the token key value to a secure location. It is recommended that you treat 
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bastion_host_pod_autoscaling_and_node_autoscaling">Bastion host, pod autoscaling, and node autoscaling</h3>
+<div class="paragraph">
+<p>The Amazon EKS Quick Start deploys the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A virtual bastion host for an administrator to run Kubectl commands against the Kubernetes cluster.</p>
+</li>
+<li>
+<p>Kubernetes horizontal pod autoscaling with target CPU utilization of 60%. This automatically scales pods if average pod utilization exceeds 60%.</p>
+</li>
+<li>
+<p>Three nodes in the Auto Scaling group (the maximum capacity). To automatically scale the nodes, we need to increase the maximum capacity values.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_upgrade_boomi_molecule_docker_image">Upgrade Boomi Molecule Docker image</h3>
+<div class="paragraph">
+<p>To upgrade the Boomi Molecule image, complete the following steps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to the bastion host.</p>
+</li>
+<li>
+<p>Run the following Kubectl command.</p>
+<div class="paragraph">
+<p><code>kubectl get statefulset -n eks-boomi-molecule -o yaml &gt; statefulset.yaml</code></p>
+</div>
+</li>
+<li>
+<p>Edit <code>statefulset.yaml</code> and update the Boomi Molecule image.</p>
+</li>
+<li>
+<p>Run the following Kubectl command. This will invoke a rolling restart of the StatefulSet.</p>
+<div class="paragraph">
+<p><code>kubectl apply -f statefulset.yaml -n eks-boomi-molecule</code></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apply_ssl_certificate_to_the_load_balancers">Apply SSL certificate to the load balancers</h3>
+<div class="paragraph">
+<p>Follow the instructions in this section to add listeners to the Application Load Balancer and Network Load Balancer.</p>
+</div>
+<div class="sect3">
+<h4 id="_application_load_balancer">Application Load Balancer</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#add-https-listener" target="_blank" rel="noopener">Add an HTTPS listener</a> for your Application Load Balancer.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>For <strong>Protocol : port</strong>, select <strong>HTTPS</strong>.</p>
+</li>
+<li>
+<p>For <strong>Default actions</strong>, select <strong>Forward to</strong>, then select the target group.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#working-with-security-group-rules" target="_blank" rel="noopener">Add an inbound rule</a> to the security group attached to the Application Load Balancer.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>For rule <strong>Type</strong>, choose <strong>HTTP</strong>.</p>
+</li>
+<li>
+<p>For rule <strong>Source</strong>, choose <strong>Anywhere-IPv4</strong>. This automatically adds a rule for the <code>0.0.0.0/0 IPv4</code> CIDR block.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html" target="_blank" rel="noopener">Add a new A record</a> to your domain in Amazon Route 53.</p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html" target="_blank" rel="noopener">Edit the record name</a>.</p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html#routing-to-elb-load-balancer-configuring" target="_blank" rel="noopener">Route traffic</a> to the Application Load Balancer.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_network_load_balancer">Network Load Balancer</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-listener.html" target="_blank" rel="noopener">Create a listener</a> for your Network Load Balancer.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>For <strong>Protocol : port</strong>, select <strong>TLS</strong>.</p>
+</li>
+<li>
+<p>For <strong>Default actions</strong>, select <strong>Forward to</strong>, then select the target group.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html" target="_blank" rel="noopener">Add a new A record</a> to your domain in Amazon Route 53.</p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-editing.html" target="_blank" rel="noopener">Edit the record name</a>.</p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html#routing-to-elb-load-balancer-configuring" target="_blank" rel="noopener">Route traffic</a> to the Network Load Balancer.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
