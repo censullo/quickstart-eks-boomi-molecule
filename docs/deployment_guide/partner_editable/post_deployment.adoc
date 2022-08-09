@@ -63,6 +63,8 @@ image::../images/image10.png[image,width=370,height=219]
 
 NOTE: Copy the token key value to a secure location. It is recommended that you treat tokens with the same level of security as you would a password. If you lose it, you will have to generate a new token and revoke the old one.
 
+== Additional information
+
 === Bastion host, pod autoscaling, and node autoscaling
 The Amazon EKS Quick Start deploys the following:
 
